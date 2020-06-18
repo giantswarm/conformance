@@ -9,7 +9,7 @@ import (
 )
 
 func handleFlags() {
-	framework.RegisterClusterFlags(flag.CommandLine)
+	framework.RegisterCommonFlags(flag.CommandLine)
 	framework.RegisterProviderFlags(flag.CommandLine)
 	flag.Parse()
 }

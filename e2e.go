@@ -14,10 +14,10 @@ import (
 )
 
 func RunE2ETests(t *testing.T) {
+	logrus.Printf("Running e2e tests for provider '%s'", framework.TestContext.Provider)
 	p, err := framework.SetupProviderConfig(framework.TestContext.Provider)
 	if err != nil {
 		logrus.Error(err)
 	}
 	p.Create()
-	logrus.Println("Blob")
 }
