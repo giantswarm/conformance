@@ -46,24 +46,24 @@ func SetupProviderConfig(providerName string) (ProviderInterface, error) {
 // ProviderInterface contains the implementation for certain
 // provider-specific functionality.
 type ProviderInterface interface {
-	Create() error
-	Update() error
-	Delete() error
+	CreateTenantCluster() error
+	UpdateTenantCluster() error
+	DeleteTenantCluster() error
 }
 
 // Provider is the default implementation of the ProviderInterface
 // which doesn't do anything.
 type Provider struct{}
 
-func (p Provider) Create() error {
+func (p Provider) CreateTenantCluster() error {
 	return fmt.Errorf("Provider does not support Create")
 }
 
-func (p Provider) Update() error {
+func (p Provider) UpdateTenantCluster() error {
 	return fmt.Errorf("Provider does not support Update")
 }
 
-func (p Provider) Delete() error {
+func (p Provider) DeleteTenantCluster() error {
 	return fmt.Errorf("Provider does not support Delete")
 }
 

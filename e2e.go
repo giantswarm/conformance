@@ -1,6 +1,7 @@
 package e2e
 
 import (
+	"os"
 	"testing"
 
 	"github.com/sirupsen/logrus"
@@ -19,5 +20,12 @@ func RunE2ETests(t *testing.T) {
 	if err != nil {
 		logrus.Error(err)
 	}
-	p.Create()
+	switch os.Args[1] {
+	case "create-cluster":
+		p.CreateTenantCluster()
+	case "update-cluster":
+	case "delete-cluster":
+	default:
+		t.Fatalf("expected 'create-cluster', 'update-cluster' or 'delete-cluster'")
+	}
 }

@@ -22,7 +22,7 @@ func newProvider() (framework.ProviderInterface, error) {
 	return &Provider{}, nil
 }
 
-func (p *Provider) Create() error {
+func (p *Provider) CreateTenantCluster() error {
 	masterAZ := strings.Split(framework.TestContext.ProviderConfig.MasterZone, ",")
 	config := cluster.Config{
 		Credential:     framework.TestContext.ProviderConfig.Credential,
@@ -49,10 +49,10 @@ func (p *Provider) Create() error {
 
 	return nil
 }
-func (p *Provider) Update() error {
+func (p *Provider) UpdateTenantCluster() error {
 	return nil
 }
-func (p *Provider) Delete() error {
+func (p *Provider) DeleteTenantCluster() error {
 	return nil
 }
 

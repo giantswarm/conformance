@@ -9,9 +9,18 @@ import (
 )
 
 func handleFlags() {
-	framework.RegisterCommonFlags(flag.CommandLine)
-	framework.RegisterProviderFlags(flag.CommandLine)
-	flag.Parse()
+	createCmd := flag.NewFlagSet("create-cluster", flag.ExitOnError)
+	framework.RegisterCommonFlags(createCmd)
+	framework.RegisterProviderFlags(createCmd)
+	switch os.Args[1] {
+	case "create-cluster":
+		createCmd.Parse(os.Args[2:])
+	case "update-cluster":
+	case "delete-cluster":
+	default:
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
 }
 
 //TestMain is the entrypoint for running e2e tests

@@ -3,7 +3,8 @@
 TODO
 
 ```bash
-go test --provider aws --cluster-name my-cluster --owner giantswarm --pod-cidr 10.0.0.0/24 --release 200.0.0 --credential my-credential --master-zone eu-central-1a,eu-central-1b,eu-central-1c --region eu-central-1
+go test -v -c -o e2e
+./e2e create-cluster --provider aws --cluster-name my-cluster --owner giantswarm --pod-cidr 10.0.0.0/24 --release 200.0.0 --credential my-credential --master-zone eu-central-1a,eu-central-1b,eu-central-1c --region eu-central-1
 ```
 
 Currently does nothing, except printing CR's
