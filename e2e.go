@@ -16,13 +16,23 @@ import (
 
 func RunE2ETests(t *testing.T) {
 	logrus.Printf("Running e2e tests for provider '%s'", framework.TestContext.Provider)
+
 	p, err := framework.SetupProviderConfig(framework.TestContext.Provider)
 	if err != nil {
-		logrus.Error(err)
+		t.Fatal(err)
 	}
+
+	c, err := framework.LoadClient()
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	switch os.Args[1] {
 	case "create-cluster":
-		p.CreateTenantCluster()
+		err := p.CreateTenantCluster(c)
+		if err != nil {
+			t.Fatal(err)
+		}
 	case "update-cluster":
 	case "delete-cluster":
 	default:

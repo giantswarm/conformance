@@ -6,6 +6,7 @@ import (
 
 type TestContextType struct {
 	ClusterName    string
+	KubeConfig     string
 	Owner          string
 	PodCidr        string
 	Release        string
@@ -29,6 +30,7 @@ var TestContext TestContextType
 // RegisterCommonFlags registers flags common to the cluster e2e test suite.
 func RegisterCommonFlags(flags *flag.FlagSet) {
 	flags.StringVar(&TestContext.ClusterName, "cluster-name", "", "The name of the Kubernetes cluster")
+	flags.StringVar(&TestContext.KubeConfig, "kubeconfig", "", "Path of the kubeconfig")
 	flags.StringVar(&TestContext.Owner, "owner", "", "The owner of the Kubernetes cluster")
 	flags.StringVar(&TestContext.PodCidr, "pod-cidr", "", "The pod cidr IP range")
 	flags.StringVar(&TestContext.Release, "release", "", "The release version")

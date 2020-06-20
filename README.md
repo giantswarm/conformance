@@ -2,10 +2,17 @@
 
 TODO
 
+Build e2e binary to use subcommands
+
 ```bash
 go test -v -c -o e2e
+```
+
+```bash
 ./e2e create-cluster --provider aws --cluster-name my-cluster --owner giantswarm --pod-cidr 10.0.0.0/24 --release 200.0.0 --credential my-credential --master-zone eu-central-1a,eu-central-1b,eu-central-1c --region eu-central-1
 ```
+
+Outside of the cluster add flag `--kubeconfig` to pass Kubernetes configuration
 
 Currently does nothing, except printing CR's
 ```bash

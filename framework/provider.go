@@ -5,6 +5,7 @@ import (
 	"os"
 	"sync"
 
+	"github.com/giantswarm/k8sclient/v3/pkg/k8sclient"
 	"github.com/pkg/errors"
 )
 
@@ -46,7 +47,7 @@ func SetupProviderConfig(providerName string) (ProviderInterface, error) {
 // ProviderInterface contains the implementation for certain
 // provider-specific functionality.
 type ProviderInterface interface {
-	CreateTenantCluster() error
+	CreateTenantCluster(c k8sclient.Interface) error
 	UpdateTenantCluster() error
 	DeleteTenantCluster() error
 }
@@ -55,7 +56,7 @@ type ProviderInterface interface {
 // which doesn't do anything.
 type Provider struct{}
 
-func (p Provider) CreateTenantCluster() error {
+func (p Provider) CreateTenantCluster(c k8sclient.Interface) error {
 	return fmt.Errorf("Provider does not support Create")
 }
 

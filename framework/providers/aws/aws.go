@@ -5,8 +5,10 @@ import (
 	"strings"
 
 	"github.com/giantswarm/conformance/framework"
+	"github.com/giantswarm/k8sclient/v3/pkg/k8sclient"
 	"github.com/giantswarm/kubectl-gs/pkg/template/cluster"
 	"github.com/sirupsen/logrus"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // Provider is a structure to handle AWS cloud for e2e testing
@@ -22,7 +24,7 @@ func newProvider() (framework.ProviderInterface, error) {
 	return &Provider{}, nil
 }
 
-func (p *Provider) CreateTenantCluster() error {
+func (p *Provider) CreateTenantCluster(c k8sclient.Interface) error {
 	masterAZ := strings.Split(framework.TestContext.ProviderConfig.MasterZone, ",")
 	config := cluster.Config{
 		Credential:     framework.TestContext.ProviderConfig.Credential,
@@ -46,6 +48,11 @@ func (p *Provider) CreateTenantCluster() error {
 	logrus.Println(prettyPrint(awsClusterCR))
 	logrus.Printf(prettyPrint(g8sControlPlaneCR))
 	logrus.Printf(prettyPrint(aWSControlPlaneCR))
+
+	pods, _ := c.K8sClient().CoreV1().Pods("giantswarm").List(metav1.ListOptions{})
+	for _, pod := range pods.Items {
+		logrus.Print(pod.Name)
+	}
 
 	return nil
 }
